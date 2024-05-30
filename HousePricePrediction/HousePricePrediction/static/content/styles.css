@@ -1,0 +1,26 @@
+.suggestions-dropdown {
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    display: none;
+    position: absolute;
+    background: white;
+    width: calc(100% - 2px);
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+    .suggestion-item:hover {
+        background-color: #f8f9fa;
+    }
+
+
+#predictionResult {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 20px;
+}

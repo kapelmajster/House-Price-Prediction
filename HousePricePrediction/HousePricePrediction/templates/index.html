@@ -1,0 +1,181 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Price Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Property Price Prediction Form</h2>
+        <form id="predictionForm" method="post" action="/">
+            <!-- City Input -->
+            <div class="form-group">
+                <label for="cityInput">City</label>
+                <input type="text" class="form-control" id="cityInput" name="city" placeholder="Start typing the city...">
+                <div id="citiesSuggestions" class="suggestions-dropdown"></div>
+            </div>
+
+            <!-- Number of Rooms -->
+            <div class="form-group">
+                <label for="roomsSelect">Number of Rooms</label>
+                <select class="form-control" id="roomsSelect" name="number_heated_rooms">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                </select>
+            </div>
+
+            <!-- Property Type -->
+            <div class="form-group">
+                <label for="propertyTypeSelect">Property Type</label>
+                <select class="form-control" id="propertyTypeSelect" name="property_type">
+                    <option>House</option>
+                    <option>Flat</option>
+                    <option>Bungalow</option>
+                    <option>Maisonette</option>
+                    <option>Park home</option>
+                    <option>Retirement Property</option>
+                </select>
+            </div>
+
+            <!-- Property Form -->
+            <div class="form-group">
+                <label for="propertyFormSelect">Property Form</label>
+                <select class="form-control" id="propertyFormSelect" name="property_form">
+                    <option>Semi-Detached</option>
+                    <option>Mid-Terrace</option>
+                    <option>End-Terrace</option>
+                    <option>Detached</option>
+                    <option>Enclosed End-Terrace</option>
+                    <option>Enclosed Mid-Terrace</option>
+                    <option>Terraced</option>            
+                </select>
+            </div>
+
+            <!-- Current Energy Rating -->
+            <div class="form-group">
+                <label for="currentEnergyRatingSelect">Current Energy Rating</label>
+                <select class="form-control" id="currentEnergyRatingSelect" name="current_energy_rating">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>Don't Know</option>
+                </select>
+            </div>
+
+            <!-- Potential Energy Rating -->
+            <div class="form-group">
+                <label for="potentialEnergyRatingSelect">Potential Energy Rating</label>
+                <select class="form-control" id="potentialEnergyRatingSelect" name="potential_energy_rating">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>Don't Know</option>
+                </select>
+            </div>
+
+            <!-- Floor Area -->
+            <div class="form-group">
+                <label for="floorAreaInput">Floor Area (sqm)</label>
+                <input type="number" class="form-control" id="floorAreaInput" name="floor_area" placeholder="Enter floor area" required pattern="\d*">
+                <div class="form-check form-check-inline mt-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="floorAreaUnknown" name="floor_area_unknown">
+                    <label class="form-check-label" for="floorAreaUnknown" style="margin-left: 15px;">
+                        Don't Know
+                    </label>
+                </div>
+            </div>
+
+            <!-- Property Age -->
+            <div class="form-group">
+                <label for="propertyAgeInput">Property Age</label>
+                <input type="number" class="form-control" id="propertyAgeInput" name="property_age" placeholder="Enter property age" required pattern="\d*">
+                <div class="mt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="property_age_option" id="newBuild" value="New Building">
+                        <label class="form-check-label" for="newBuild">New Building</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="property_age_option" id="unknownAge" value="Don't Know">
+                        <label class="form-check-label" for="unknownAge">Don't Know</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="property_age_option" id="specificAge" value="Specific Age" checked>
+                        <label class="form-check-label" for="specificAge">Choose Age</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Month Selection -->
+            <select name="month" id="month">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+
+
+            <!-- Year Selection -->
+            <select name="year" id="year">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+            </select>
+
+            <!-- Predict Button -->
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        <!-- Prediction Result -->
+        <div id="predictionResult">
+            {% if prediction %}
+            <div class="prediction-result">
+                <h1>Prediction Result:</h1>
+                <p>{{ prediction }}</p>
+            </div>
+            {% endif %}
+        </div>
+        <script src="{{ url_for('static', filename='scripts/autocomplete.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/dontknowbox.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
+</body>
+</html>
+
+{% endblock %}
